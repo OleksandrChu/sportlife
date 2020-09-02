@@ -8,7 +8,7 @@ namespace sportlife.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Account",
+                name: "Accounts",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -41,7 +41,6 @@ namespace sportlife.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Type = table.Column<int>(nullable: false),
                     AccountId = table.Column<int>(nullable: true),
                     ExpirationDate = table.Column<DateTime>(nullable: false)
                 },
@@ -51,7 +50,7 @@ namespace sportlife.Migrations
                     table.ForeignKey(
                         name: "FK_Memberships_Account_AccountId",
                         column: x => x.AccountId,
-                        principalTable: "Account",
+                        principalTable: "Accounts",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -71,7 +70,7 @@ namespace sportlife.Migrations
                 name: "Memberships");
 
             migrationBuilder.DropTable(
-                name: "Account");
+                name: "Accounts");
         }
     }
 }

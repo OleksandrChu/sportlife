@@ -18,7 +18,7 @@ namespace sportlife.Controllers
         [HttpGet("{id}")]
         public ActionResult<MemberShip> GetMembership(int id) 
         {
-            return Ok();
+            return Ok(_context.Memberships.Find(id));
         }
 
         [HttpPost]
