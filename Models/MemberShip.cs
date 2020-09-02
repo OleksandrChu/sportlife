@@ -9,6 +9,7 @@ namespace sportlife.Models
     {
         public int Id { get; set; }
         
+        [NotMapped]
         public MemberShipType Type { get; set; }
 
         public Account Account { get; set; }
