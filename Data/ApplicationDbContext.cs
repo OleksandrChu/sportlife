@@ -7,6 +7,8 @@ namespace sportlife.Data
     {
         public ApplicationDbContext(DbContextOptions options) : base(options) { }
 
-        public DbSet<MemberShip> Memberships {get; set;}
+       public DbSet<MemberShip> Memberships {get; set;}
+
+        public DbSet<Client> Clients {get; set;}
     }
 }
