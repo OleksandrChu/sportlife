@@ -27,7 +27,7 @@ namespace sportlife.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Account");
+                    b.ToTable("Accounts");
                 });
 
             modelBuilder.Entity("sportlife.Models.Client", b =>

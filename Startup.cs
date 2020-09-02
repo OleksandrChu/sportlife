@@ -10,6 +10,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 using sportlife.Data;
+using sportlife.Builders;
 using Microsoft.AspNetCore.Mvc;
 
 namespace sportlife
@@ -28,6 +29,7 @@ namespace sportlife
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(option =>  option.UseSqlite(_configuration.GetConnectionString("SQLite")));
+            services.AddScoped<IMembershipBuilder, MembershipBuilder>();
             services.AddMvc(option => option.EnableEndpointRouting = false).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
         }
 

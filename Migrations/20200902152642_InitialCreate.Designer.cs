@@ -9,7 +9,7 @@ using sportlife.Data;
 namespace sportlife.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200902124808_InitialCreate")]
+    [Migration("20200902152642_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -29,7 +29,7 @@ namespace sportlife.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Account");
+                    b.ToTable("Accounts");
                 });
 
             modelBuilder.Entity("sportlife.Models.Client", b =>

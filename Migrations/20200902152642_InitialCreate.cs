@@ -17,7 +17,7 @@ namespace sportlife.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Account", x => x.Id);
+                    table.PrimaryKey("PK_Accounts", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -41,6 +41,7 @@ namespace sportlife.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    Type = table.Column<int>(nullable: false),
                     AccountId = table.Column<int>(nullable: true),
                     ExpirationDate = table.Column<DateTime>(nullable: false)
                 },
@@ -48,7 +49,7 @@ namespace sportlife.Migrations
                 {
                     table.PrimaryKey("PK_Memberships", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Memberships_Account_AccountId",
+                        name: "FK_Memberships_Accounts_AccountId",
                         column: x => x.AccountId,
                         principalTable: "Accounts",
                         principalColumn: "Id",
