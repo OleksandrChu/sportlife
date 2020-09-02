@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using sportlife.Services;
 
 namespace sportlife.Models
 {
@@ -15,7 +14,7 @@ namespace sportlife.Models
         public Account Account { get; set; }
 
         [NotMapped]
-        public List<IService> Services { get; set; }
+        public List<Service> Services { get; set; }
 
         public DateTime ExpirationDate { get; set; }
     }
