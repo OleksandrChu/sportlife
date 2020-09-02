@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using sportlife.Data;
 using sportlife.Models;
+using sportlife.Repositories;
 
 namespace sportlife.Controllers
 {
@@ -8,9 +9,9 @@ namespace sportlife.Controllers
     [Route("api/[controller]")]
     public class AccountController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IRepository<Account> _context;
 
-        public AccountController(ApplicationDbContext context)
+        public AccountController(IRepository<Account> context)
         {
             _context = context;
         }
@@ -18,15 +19,13 @@ namespace sportlife.Controllers
         [HttpGet("{id}")]
         public ActionResult<Account> GetAccount(int id) 
         {
-            return Ok(_context.Accounts.Find(id));
+            return Ok(_context.Select(id).Result);
         }
 
         [HttpPost]
         public ActionResult<Account> CreateAccount([FromBody] Account account) 
         {
-            _context.Accounts.Add(account);
-            _context.SaveChanges();
-            return Ok(account);
+            return Ok(_context.Create(account).Result);
         }
     }
 }
