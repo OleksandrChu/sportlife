@@ -8,11 +8,11 @@ namespace sportlife.Controllers
     [Route("api/[controller]")]
     public class TransactionController : ControllerBase
     {
-        private readonly IRepository<Transaction> _repository;
+        private readonly TransactionRepository _repository;
 
-        public TransactionController(IRepository<Transaction> context)
+        public TransactionController(IRepository<Transaction> repository)
         {
-            _repository = context;
+            _repository = (TransactionRepository)repository;
         }
 
         [HttpGet("{id}")]

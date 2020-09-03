@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using sportlife.Data;
 using sportlife.Models;
 using sportlife.Services;
@@ -22,7 +23,11 @@ namespace  sportlife.Repositories
 
         public async Task<Account> Select(int id)
         {
-            return await _context.Accounts.FindAsync(id);
+            //  var memberShip = await _context.Memberships.Include(p => p.Account).FirstAsync();
+            // _builder.IncludeServicesTo(memberShip);
+            // return memberShip;
+            var acc = await _context.Accounts.Include(a => a.Transactions).FirstAsync();
+            return acc;
         }
 
         public async Task<Account> Update(Account model)

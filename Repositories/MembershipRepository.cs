@@ -28,7 +28,10 @@ namespace sportlife.Repositories
 
         public async Task<MemberShip> Select(int id)
         {
-            var memberShip = await _context.Memberships.Include(p => p.Account).FirstAsync();
+            var memberShip = await _context.Memberships
+                .Include(p => p.Account)
+                .ThenInclude(t => t.Transactions)
+                .FirstAsync();
             _builder.IncludeServicesTo(memberShip);
             return memberShip;
         }
