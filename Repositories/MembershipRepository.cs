@@ -20,8 +20,8 @@ namespace sportlife.Repositories
 
         public async Task<MemberShip> Create(MemberShip model)
         {
-             System.Console.WriteLine(_context.Accounts.Find(_context.Accounts.Max(p => p.Id)).Id);
-            _context.Memberships.Add(model);
+            model.Account = _context.Accounts.Find(_context.Accounts.Max(p => p.Id));
+            _context.Add(model);
             await _context.SaveChangesAsync();
             return model;
         }
