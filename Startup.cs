@@ -34,6 +34,7 @@ namespace sportlife
             services.AddScoped<IMembershipBuilder, MembershipBuilder>();
             services.AddScoped<IRepository<MemberShip>, MembershipRepository>();
             services.AddScoped<IRepository<Account>, AccountRepository>();
+            services.AddScoped<IRepository<Transaction>, TransactionRepository>();
             services.AddMvc(option => option.EnableEndpointRouting = false).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
         }
 
