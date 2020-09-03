@@ -4,6 +4,6 @@ namespace sportlife.Builders
 {
     public interface IMembershipBuilder
     {
-        void Build(MemberShip memberShip);
+        void IncludeServicesTo(MemberShip memberShip);
     }
 }

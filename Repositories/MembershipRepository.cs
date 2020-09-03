@@ -1,4 +1,6 @@
+using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using sportlife.Builders;
 using sportlife.Data;
 using sportlife.Models;
@@ -18,6 +20,7 @@ namespace sportlife.Repositories
 
         public async Task<MemberShip> Create(MemberShip model)
         {
+             System.Console.WriteLine(_context.Accounts.Find(_context.Accounts.Max(p => p.Id)).Id);
             _context.Memberships.Add(model);
             await _context.SaveChangesAsync();
             return model;
@@ -25,8 +28,8 @@ namespace sportlife.Repositories
 
         public async Task<MemberShip> Select(int id)
         {
-            var memberShip = await _context.Memberships.FindAsync(id);
-            _builder.Build(memberShip);
+            var memberShip = await _context.Memberships.Include(p => p.Account).FirstAsync();
+            _builder.IncludeServicesTo(memberShip);
             return memberShip;
         }
 

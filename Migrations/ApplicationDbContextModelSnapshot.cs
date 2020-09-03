@@ -56,7 +56,7 @@ namespace sportlife.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("AccountId")
+                    b.Property<int>("AccountId")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("ExpirationDate")

@@ -42,7 +42,7 @@ namespace sportlife.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Type = table.Column<int>(nullable: false),
-                    AccountId = table.Column<int>(nullable: true),
+                    AccountId = table.Column<int>(nullable: false),
                     ExpirationDate = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
