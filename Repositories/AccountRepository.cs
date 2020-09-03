@@ -33,13 +33,13 @@ namespace  sportlife.Repositories
 
         public Account TopUp(Account account, int amount)
         {
-            account.Points += amount;
+            account.Balance += amount;
             return Update(account).Result;
         }
 
         public Account Pay(Account account, int amount)
         {
-            account.Points -= amount;
+            account.Balance -= amount;
             return Update(account).Result;
         }
     }
