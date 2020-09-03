@@ -22,6 +22,13 @@ namespace sportlife.Repositories
             return model;
         }
 
+        public async Task<List<Transaction>> SelectAll(int id)
+        {
+            return await _context.Transactions
+                .Where(transaction => transaction.AccountId == id)
+                .ToListAsync();
+        }
+
         public Task<Transaction> Select(int id)
         {
             throw new System.NotImplementedException();
@@ -30,13 +37,6 @@ namespace sportlife.Repositories
         public Task<Transaction> Update(Transaction model)
         {
             throw new System.NotImplementedException();
-        }
-
-        public async Task<List<Transaction>> SelectAll(int id)
-        {
-            return await _context.Transactions
-                .Where(transaction => transaction.AccountId == id)
-                .ToListAsync();
         }
     }
 }

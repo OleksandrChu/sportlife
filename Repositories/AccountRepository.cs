@@ -35,17 +35,5 @@ namespace  sportlife.Repositories
             await _context.SaveChangesAsync();
             return model;
         }
-
-        public Account TopUp(Account account, int amount)
-        {
-            account.Balance += amount;
-            return Update(account).Result;
-        }
-
-        public Account Pay(Account account, int amount)
-        {
-            account.Balance -= amount;
-            return Update(account).Result;
-        }
     }
 }

@@ -27,17 +27,5 @@ namespace sportlife.Controllers
         {
             return Created("", _repository.Create(account).Result);
         }
-
-        [HttpPatch("top/{id}/{amount}")]
-        public ActionResult<Account> TopUpAccount(int id, int amount) 
-        {
-            return Created("", _repository.TopUp(_repository.Select(id).Result, amount));
-        }
-
-        [HttpPatch("pay/{id}/{amount}")]
-        public ActionResult<Account> Pay(int id, int amount) 
-        {
-             return Created("", _repository.Pay(_repository.Select(id).Result, amount));
-        }
     }
 }
