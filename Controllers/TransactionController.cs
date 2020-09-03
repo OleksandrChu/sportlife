@@ -21,8 +21,15 @@ namespace sportlife.Controllers
             return Ok(_repository.Select(id).Result);
         }
 
-        [HttpPost]
-        public ActionResult<Account> CreateAccount([FromBody] Transaction transaction) 
+        [HttpPost("pay")]
+        public ActionResult<Transaction> PayTransaction([FromBody] Transaction transaction) 
+        {
+            transaction.Amount = transaction.Amount * -1;
+            return Created("", _repository.Create(transaction).Result);
+        }
+
+        [HttpPost("top")]
+        public ActionResult<Transaction> TopUpTransaction([FromBody] Transaction transaction) 
         {
             return Created("", _repository.Create(transaction).Result);
         }
