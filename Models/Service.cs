@@ -4,16 +4,14 @@ namespace sportlife.Models
 {
     public class Service
     {
-        public Service(string title, int price)
+        public Service(int id, string title, int price)
         {
+            Id = id;
             Title = title;
             Price = price;
         }
 
-        public Service(string title)
-        {
-            Title = title;
-        }
+        public int Id { get; set; }
 
         public string Title { get; set; }
 
