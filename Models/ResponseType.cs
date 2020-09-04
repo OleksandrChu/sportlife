@@ -1,6 +1,6 @@
 namespace sportlife.Models
 {
-    public enum ResponceTypes
+    public enum ResponceType
     {
         None = 0,
         ACCESS_DENIED = 1,

@@ -4,6 +4,6 @@ namespace sportlife.Services
 {
     public interface IAuthenticationService
     {
-        ResponceTypes Authenticate(MemberShip memberShip);
+        ResponceType Authenticate(MemberShip memberShip);
     }
 }
