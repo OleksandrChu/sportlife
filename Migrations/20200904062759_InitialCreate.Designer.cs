@@ -9,7 +9,7 @@ using sportlife.Data;
 namespace sportlife.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200903150248_InitialCreate")]
+    [Migration("20200904062759_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -44,10 +44,15 @@ namespace sportlife.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("TEXT");
 
+                    b.Property<int?>("MemberShipId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Phone")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("MemberShipId");
 
                     b.ToTable("Clients");
                 });
@@ -94,6 +99,13 @@ namespace sportlife.Migrations
                     b.HasIndex("AccountId");
 
                     b.ToTable("Transactions");
+                });
+
+            modelBuilder.Entity("sportlife.Models.Client", b =>
+                {
+                    b.HasOne("sportlife.Models.MemberShip", "MemberShip")
+                        .WithMany()
+                        .HasForeignKey("MemberShipId");
                 });
 
             modelBuilder.Entity("sportlife.Models.MemberShip", b =>
