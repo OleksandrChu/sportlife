@@ -7,7 +7,7 @@ namespace sportlife.Builders
     {
         public void IncludeServicesTo(MemberShip memberShip)
         {
-            memberShip.Services = ServicesData.services[memberShip.Type];
+            memberShip.Services = ServicesData.memberships[memberShip.Type];
         }
     }
 }
