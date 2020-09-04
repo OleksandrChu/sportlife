@@ -17,6 +17,7 @@ namespace sportlife.Services
 
         public async Task<Client> Create(Client client)
         {
+            client.MemberShip = _context.Memberships.Find(_context.Memberships.Max(p => p.Id));
             _context.Add(client);
             await _context.SaveChangesAsync();
             return client;
