@@ -4,12 +4,12 @@ using sportlife.Data;
 using sportlife.Models;
 using sportlife.Services;
 
-namespace  sportlife.Repositories
+namespace sportlife.Services
 {
-    public class AccountRepository : IRepository<Account>
+    public class AccountService : IAccountService
     {
         private readonly ApplicationDbContext _context;
-        public AccountRepository(ApplicationDbContext context)
+        public AccountService(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -23,14 +23,7 @@ namespace  sportlife.Repositories
 
         public async Task<Account> Select(int id)
         {
-            var acc = await _context.Accounts.Include(a => a.Transactions).FirstAsync();
-            return acc;
-        }
-
-        public async Task<Account> Update(Account model)
-        {
-            await _context.SaveChangesAsync();
-            return model;
+            return await _context.Accounts.Include(a => a.Transactions).FirstAsync();
         }
     }
 }

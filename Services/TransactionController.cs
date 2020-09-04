@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using sportlife.Models;
-using sportlife.Repositories;
+using sportlife.Services;
 
 namespace sportlife.Controllers
 {
@@ -8,30 +8,30 @@ namespace sportlife.Controllers
     [Route("api/[controller]")]
     public class TransactionController : ControllerBase
     {
-        private readonly TransactionRepository _repository;
+        private readonly ITransactionService _service;
 
-        public TransactionController(IRepository<Transaction> repository)
+        public TransactionController(ITransactionService service)
         {
-            _repository = (TransactionRepository)repository;
+            _service = service;
         }
 
         [HttpGet("{id}")]
         public ActionResult<Transaction> GetTransactions(int id) 
         {
-            return Ok(_repository.Select(id).Result);
+            return Ok(_service.SelectAll(id).Result);
         }
 
         [HttpPost("pay")]
         public ActionResult<Transaction> PayTransaction([FromBody] Transaction transaction) 
         {
             transaction.Amount = transaction.Amount * -1;
-            return Created("", _repository.Create(transaction).Result);
+            return Created("", _service.Create(transaction).Result);
         }
 
         [HttpPost("top")]
         public ActionResult<Transaction> TopUpTransaction([FromBody] Transaction transaction) 
         {
-            return Created("", _repository.Create(transaction).Result);
+            return Created("", _service.Create(transaction).Result);
         }
     }
 }

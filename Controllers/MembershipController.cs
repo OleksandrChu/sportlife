@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using sportlife.Data;
 using sportlife.Models;
 using sportlife.Builders;
-using sportlife.Repositories;
+using sportlife.Services;
 
 namespace sportlife.Controllers
 {
@@ -10,23 +10,23 @@ namespace sportlife.Controllers
     [Route("api/[controller]")]
     public class MembershipController : ControllerBase
     {
-        private readonly IRepository<MemberShip> _context;
+        private readonly IMembershipService _service;
 
-        public MembershipController(IRepository<MemberShip> context)
+        public MembershipController(IMembershipService service)
         {
-            _context = context;
+            _service = service;
         }
 
         [HttpGet("{id}")]
         public ActionResult<MemberShip> GetMembership(int id) 
         {
-            return Ok(_context.Select(id).Result);
+            return Ok(_service.Select(id).Result);
         }
 
         [HttpPost]
         public ActionResult<MemberShip> CreateMembership([FromBody] MemberShip memberShip) 
         {
-            return Ok(_context.Create(memberShip).Result);
+            return Ok(_service.Create(memberShip).Result);
         }
     }
 }

@@ -5,12 +5,12 @@ using Microsoft.EntityFrameworkCore;
 using sportlife.Data;
 using sportlife.Models;
 
-namespace sportlife.Repositories
+namespace sportlife.Services
 {
-    public class TransactionRepository : IRepository<Transaction>
+    public class TransactionService : ITransactionService
     {
         private readonly ApplicationDbContext _context;
-        public TransactionRepository(ApplicationDbContext context)
+        public TransactionService(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -31,16 +31,6 @@ namespace sportlife.Repositories
             return await _context.Transactions
                 .Where(transaction => transaction.AccountId == id)
                 .ToListAsync();
-        }
-
-        public Task<Transaction> Select(int id)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public Task<Transaction> Update(Transaction model)
-        {
-            throw new System.NotImplementedException();
         }
     }
 }

@@ -5,14 +5,14 @@ using sportlife.Builders;
 using sportlife.Data;
 using sportlife.Models;
 
-namespace sportlife.Repositories
+namespace sportlife.Services
 {
-    public class MembershipRepository : IRepository<MemberShip>
+    public class MembershipService : IMembershipService
     {
         private readonly ApplicationDbContext _context;
         private readonly IMembershipBuilder _builder;
 
-        public MembershipRepository(ApplicationDbContext context, IMembershipBuilder builder)
+        public MembershipService(ApplicationDbContext context, IMembershipBuilder builder)
         {
             _context = context;
             _builder = builder;
@@ -34,11 +34,6 @@ namespace sportlife.Repositories
                 .Where(y => y.Id == id).FirstAsync();
             _builder.IncludeServicesTo(memberShip);
             return memberShip;
-        }
-
-        public Task<MemberShip> Update(MemberShip model)
-        {
-            throw new System.NotImplementedException();
         }
     }
 }
