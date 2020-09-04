@@ -5,7 +5,7 @@ using sportlife.Services;
 namespace sportlife.Controllers
 {
     [ApiController]
-    [Route("api/auth")]
+    [Route("api/club")]
     public class SportClubController : ControllerBase
     {
         private readonly IClubService _service;
@@ -19,13 +19,13 @@ namespace sportlife.Controllers
             _transactionService = transactionService;
         }
 
-        [HttpPost]
-        public ActionResult Use(int membershipId, int serviceId) 
+        [HttpPost("use{serviceId}/{membershipId}")]
+        public ActionResult Use(int serviceId, int membershipId) 
         {
             var membership = _membershipService.Select(membershipId).Result;
             var service = ServicesData.services.Find(service => service.Id == serviceId);
             // _service.Use(service, membership);
-            return Created("", _service.Use(service, membership));
+            return Ok(_service.Use(service, membership));
         }
     }
 }
