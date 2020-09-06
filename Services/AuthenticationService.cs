@@ -13,12 +13,12 @@ namespace sportlife.Services
         {
             _context = context;
         }
-        public ResponceType Authenticate(MemberShip memberShip)
+        public ServiceUsageCode Authenticate(MemberShip memberShip)
         {
             var accountBalance = _context.Accounts
                                 .Where(account => account.Id == memberShip.Account.Id)
                                 .First().Balance;
-            return (IsNotExpired(memberShip.ExpirationDate) && accountBalance > 0) ? ResponceType.CONFIRMED : ResponceType.ACCESS_DENIED;
+            return (IsNotExpired(memberShip.ExpirationDate) && accountBalance > 0) ? ServiceUsageCode.CONFIRMED : ServiceUsageCode.ACCESS_DENIED;
         }
 
         private bool IsNotExpired(DateTime expirationDate)

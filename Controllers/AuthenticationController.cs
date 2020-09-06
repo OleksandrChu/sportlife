@@ -18,9 +18,14 @@ namespace sportlife.Controllers
         }
 
         [HttpPost("membership/{id}")]
-        public ActionResult<ResponceType> CreateAccount(int id)
+        public ActionResult<ServiceUsageCode> Authenticate(int id)
         {
-            return Ok(_authService.Authenticate(_membershipService.Select(id).Result));
+            var auth = _authService.Authenticate(_membershipService.Select(id).Result);
+            if(auth.Equals(ServiceUsageCode.ACCESS_DENIED)) 
+            {
+                return StatusCode(403, "Access denied");
+            }
+            return Ok("Confirmed");
         }
     }
 }
