@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using sportlife.Data;
 using sportlife.Models;
@@ -18,6 +19,11 @@ namespace sportlife.Services
             await _context.ServiceHistories.AddAsync(model);
             await _context.SaveChangesAsync();
             return model;
+        }
+
+        public Task<List<ServiceHistory>> SelectAll()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

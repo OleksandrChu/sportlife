@@ -22,7 +22,13 @@ namespace sportlife.Controllers
         public ActionResult GetStat() 
         {
             // SELECT type, COUNT(type) FROM Memberships GROUP BY type
-            return Ok(_statisticsService.GetByType());
+            return Ok(_statisticsService.GetMemberhipByTypeStatictics());
+        }
+
+        [HttpGet("1")]
+        public ActionResult GetSta1t() 
+        {
+            return Ok(_statisticsService.GetPaidServicesStatistics());
         }
     }
 }

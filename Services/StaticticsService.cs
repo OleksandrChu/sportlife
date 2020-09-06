@@ -15,11 +15,13 @@ namespace sportlife.Services
             _context = context;
         }
 
-        public void GetMostPopularPaidServicesByTransactions() {
-            //_context.Transactions
+        public IQueryable GetPaidServicesStatistics() {
+            return  _context.ServiceHistories
+                                .GroupBy(type => type.ServiceId)
+                                .Select(membership => new {MemberShipType = membership.Key, UsedCount= membership.Count()});
         }
 
-        public IQueryable GetByType()
+        public IQueryable GetMemberhipByTypeStatictics()
         {
             return  _context.Memberships
                                 .GroupBy(type => type.Type)

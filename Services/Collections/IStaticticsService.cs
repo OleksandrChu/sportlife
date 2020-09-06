@@ -4,6 +4,8 @@ namespace sportlife.Services
 {
     public interface IStaticticsService
     {
-        IQueryable GetByType();
+        IQueryable GetMemberhipByTypeStatictics();
+
+        IQueryable GetPaidServicesStatistics();
     }
 }
