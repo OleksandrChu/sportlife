@@ -28,7 +28,7 @@ namespace sportlife.Controllers
         [HttpGet("1")]
         public ActionResult GetSta1t() 
         {
-            return Ok(_statisticsService.GetPaidServicesStatistics());
+            return Ok(_statisticsService.GetUsingServicesStatistics());
         }
     }
 }

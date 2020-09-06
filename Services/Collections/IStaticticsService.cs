@@ -6,6 +6,6 @@ namespace sportlife.Services
     {
         IQueryable GetMemberhipByTypeStatictics();
 
-        IQueryable GetPaidServicesStatistics();
+        IQueryable GetUsingServicesStatistics();
     }
 }

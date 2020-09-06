@@ -15,7 +15,7 @@ namespace sportlife.Services
             _context = context;
         }
 
-        public IQueryable GetPaidServicesStatistics() {
+        public IQueryable GetUsingServicesStatistics() {
             return  _context.ServiceHistories
                                 .GroupBy(type => type.ServiceId)
                                 .Select(membership => new {MemberShipType = membership.Key, UsedCount= membership.Count()});
