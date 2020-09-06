@@ -5,27 +5,46 @@ using sportlife.Services;
 namespace sportlife.Controllers
 {
     [ApiController]
-    [Route("api/club")]
+    [Route("api/passes")]
     public class SportClubController : ControllerBase
     {
-        private readonly IClubService _service;
+        private readonly IClubService _clubService;
         private readonly IMembershipService _membershipService;
         private readonly ITransactionService _transactionService;
+        private readonly IAccountService _accountService;
         
-        public SportClubController(IClubService service, IMembershipService membershipService, ITransactionService transactionService)
+        public SportClubController(IClubService service, IMembershipService membershipService,
+                                   ITransactionService transactionService, IAccountService accountService)
         {
-            _service = service;
+            _clubService = service;
             _membershipService = membershipService;
             _transactionService = transactionService;
+            _accountService = accountService;
         }
 
-        [HttpPost("use{serviceId}/{membershipId}")]
+        [HttpPost("use/{serviceId}/{membershipId}")]
         public ActionResult Use(int serviceId, int membershipId) 
         {
+           
             var membership = _membershipService.Select(membershipId).Result;
+            membership.Account = _accountService.Select(membership.Account.Id).Result;
             var service = ServicesData.services.Find(service => service.Id == serviceId);
-            // _service.Use(service, membership);
-            return Ok(_service.Use(service, membership));
+            var serviceUsage = _clubService.Use(service, membership);
+            if(serviceUsage.Equals(ServiceUsageCode.NEED_TOP_UP_ACCOUNT))
+            {
+                return StatusCode(402, "Not enough funds. Need to top up account");
+            }
+            if(serviceUsage.Equals(ServiceUsageCode.PAID))
+            {
+                _transactionService.Create(new Transaction()
+                {
+                    AccountId = membership.Account.Id,
+                    Amount = service.Price * - 1,
+                    Description = $"Paid {service.Price} credits for {service.Title} service."
+                });
+                return Created("", "Paid"); 
+            }
+            return Ok("Confirmed");
         }
     }
 }

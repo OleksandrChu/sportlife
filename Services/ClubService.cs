@@ -12,31 +12,28 @@ namespace sportlife.Services
         {
             _context = context;
         }
-        public ResponceType Use(Service service, MemberShip memberShip)
+        public ServiceUsageCode Use(Service service, MemberShip memberShip)
         {
-            var accountBalance = _context.Accounts
-                                .Where(account => account.Id == memberShip.Account.Id)
-                                .First().Balance;
             var IsInclude = IsServiceIncude(service, memberShip);
-            return BuildResponse(IsInclude, accountBalance, service.Price);
+            return BuildResponse(IsInclude, memberShip.Account.Balance, service.Price);
         }
 
         private bool IsServiceIncude(Service service, MemberShip memberShip)
         {
-            return (memberShip.Services.Find(s => s.Title.Equals(s)) != null);
+            return (memberShip.Services.Find(s => s.Title.Equals(service.Title)) != null);
         }
 
-        private ResponceType BuildResponse(bool IsInclude, int accountBalance, int servicePrice)
+        private ServiceUsageCode BuildResponse(bool IsInclude, int accountBalance, int servicePrice)
         {
             if(!IsInclude && accountBalance >= servicePrice) 
             {
-                return ResponceType.PAID;
+                return ServiceUsageCode.PAID;
             }
             else if(!IsInclude && accountBalance < servicePrice) 
             {
-                return ResponceType.NEED_TOP_UP_ACCOUNT;
+                return ServiceUsageCode.NEED_TOP_UP_ACCOUNT;
             }
-            return ResponceType.CONFIRMED;
+            return ServiceUsageCode.CONFIRMED;
         }
     }
 }
