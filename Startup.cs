@@ -39,6 +39,7 @@ namespace sportlife
             services.AddScoped<IAuthenticationService, AuthenticationService>();
             services.AddScoped<IClubService, ClubService>();
             services.AddScoped<IStaticticsService, StatisticsService>();
+            services.AddScoped<IHistoryService, HistoryService>();
             services.AddMvc(option => option.EnableEndpointRouting = false).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
         }
 
