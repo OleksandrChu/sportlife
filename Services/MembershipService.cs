@@ -30,7 +30,6 @@ namespace sportlife.Services
         {
             var memberShip = await _context.Memberships
                 .Include(p => p.Account)
-                .ThenInclude(t => t.Transactions)
                 .Where(y => y.Id == id).FirstAsync();
             _builder.IncludeServicesTo(memberShip);
             return memberShip;

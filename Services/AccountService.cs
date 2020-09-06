@@ -10,6 +10,7 @@ namespace sportlife.Services
     public class AccountService : IAccountService
     {
         private readonly ApplicationDbContext _context;
+
         public AccountService(ApplicationDbContext context)
         {
             _context = context;
@@ -24,10 +25,10 @@ namespace sportlife.Services
 
         public async Task<Account> Select(int id)
         {
-            var account = await _context.Accounts.Include(a => a.Transactions).FirstAsync();
-            account.Balance = _context.Transactions
-                        .Where(transaction => transaction.AccountId == account.Id)
-                        .Sum(transaction => transaction.Amount);
+            var account = await _context.Accounts
+                                .Include(a => a.Transactions)
+                                .FirstAsync(account => account.Id == id);
+            account.Balance = account.Transactions.Sum(transaction => transaction.Amount);
             return account;
         }
     }

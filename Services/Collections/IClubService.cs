@@ -4,6 +4,6 @@ namespace sportlife.Services
 {
     public interface IClubService
     {
-        ResponceType Use(Service service, MemberShip memberShip);
+        ServiceUsageCode Use(Service service, MemberShip memberShip);
     }
 }
