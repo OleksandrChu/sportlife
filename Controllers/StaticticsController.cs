@@ -19,16 +19,21 @@ namespace sportlife.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetStat() 
+        public ActionResult GetMemberhipByTypeStatictics() 
         {
-            // SELECT type, COUNT(type) FROM Memberships GROUP BY type
             return Ok(_statisticsService.GetMemberhipByTypeStatictics());
         }
 
-        [HttpGet("1")]
-        public ActionResult GetSta1t() 
+        [HttpGet("service")]
+        public ActionResult GetUsingServicesStatistics() 
         {
             return Ok(_statisticsService.GetUsingServicesStatistics());
+        }
+
+        [HttpGet("visit")]
+        public ActionResult GetVisitClubStatistics() 
+        {
+            return Ok(_statisticsService.GetVisitClubStatistics());
         }
     }
 }
