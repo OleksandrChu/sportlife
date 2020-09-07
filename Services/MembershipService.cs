@@ -37,5 +37,15 @@ namespace sportlife.Services
             _builder.IncludeServicesTo(memberShip);
             return memberShip;
         }
+
+        public async Task<MemberShip> Update(int id, UpdateType type)
+        {
+            var membership = await _context.Memberships
+                                        .Where(membership => membership.Id == id)
+                                        .FirstAsync();
+            membership.Type = type.Type;
+            await _context.SaveChangesAsync();
+            return membership;
+        }
     }
 }

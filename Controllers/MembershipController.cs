@@ -28,5 +28,11 @@ namespace sportlife.Controllers
         {
             return Ok(_service.Create(memberShip).Result);
         }
+
+        [HttpPatch("{id}")]
+        public ActionResult<MemberShip> UpdateMembershipType(int id, [FromBody] UpdateType updateType) 
+        {
+            return Ok(_service.Update(id, updateType).Result);
+        }
     }
 }

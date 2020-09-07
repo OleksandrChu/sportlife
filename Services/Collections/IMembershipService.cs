@@ -8,5 +8,7 @@ namespace sportlife.Services
         Task<MemberShip> Create(MemberShip model);
 
         Task<MemberShip> Select(int id);
+        
+        Task<MemberShip> Update(int id, UpdateType type);
     }
 }
