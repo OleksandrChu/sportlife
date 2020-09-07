@@ -116,6 +116,23 @@ namespace sportlife.Migrations
                     b.ToTable("Transactions");
                 });
 
+            modelBuilder.Entity("sportlife.Models.VisitHistory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("MembershipId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("visitTime")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("VisitHistories");
+                });
+
             modelBuilder.Entity("sportlife.Models.Client", b =>
                 {
                     b.HasOne("sportlife.Models.MemberShip", "MemberShip")

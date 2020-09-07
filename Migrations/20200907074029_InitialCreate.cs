@@ -35,6 +35,20 @@ namespace sportlife.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "VisitHistories",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    MembershipId = table.Column<int>(nullable: false),
+                    visitTime = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_VisitHistories", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Memberships",
                 columns: table => new
                 {
@@ -124,6 +138,9 @@ namespace sportlife.Migrations
 
             migrationBuilder.DropTable(
                 name: "Transactions");
+
+            migrationBuilder.DropTable(
+                name: "VisitHistories");
 
             migrationBuilder.DropTable(
                 name: "Memberships");
