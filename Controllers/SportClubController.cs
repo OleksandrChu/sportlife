@@ -25,7 +25,7 @@ namespace sportlife.Controllers
             _historyService = historyService;
         }
 
-        [HttpPost("use/{serviceId}/{membershipId}")]
+        [HttpPost]
         public ActionResult Use(int serviceId, int membershipId) 
         {
            
