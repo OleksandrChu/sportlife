@@ -12,5 +12,7 @@ namespace sportlife.Data
         public DbSet<Client> Clients { get; set; }
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
+        public DbSet<ServiceHistory> ServiceHistories { get; set; }
+        public DbSet<VisitHistory> VisitHistories { get; set; }
     }
 }

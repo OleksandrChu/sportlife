@@ -12,11 +12,40 @@ namespace sportlife.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Debt = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Accounts", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ServiceHistories",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    MemberShipType = table.Column<int>(nullable: false),
+                    ServiceId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ServiceHistories", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "VisitHistories",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    MembershipId = table.Column<int>(nullable: false),
+                    visitTime = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_VisitHistories", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -105,7 +134,13 @@ namespace sportlife.Migrations
                 name: "Clients");
 
             migrationBuilder.DropTable(
+                name: "ServiceHistories");
+
+            migrationBuilder.DropTable(
                 name: "Transactions");
+
+            migrationBuilder.DropTable(
+                name: "VisitHistories");
 
             migrationBuilder.DropTable(
                 name: "Memberships");

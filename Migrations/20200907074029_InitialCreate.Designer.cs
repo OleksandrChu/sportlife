@@ -9,7 +9,7 @@ using sportlife.Data;
 namespace sportlife.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200906185810_InitialCreate")]
+    [Migration("20200907074029_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -22,6 +22,9 @@ namespace sportlife.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Debt")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
@@ -76,6 +79,23 @@ namespace sportlife.Migrations
                     b.ToTable("Memberships");
                 });
 
+            modelBuilder.Entity("sportlife.Models.ServiceHistory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("MemberShipType")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ServiceId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ServiceHistories");
+                });
+
             modelBuilder.Entity("sportlife.Models.Transaction", b =>
                 {
                     b.Property<int>("Id")
@@ -96,6 +116,23 @@ namespace sportlife.Migrations
                     b.HasIndex("AccountId");
 
                     b.ToTable("Transactions");
+                });
+
+            modelBuilder.Entity("sportlife.Models.VisitHistory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("MembershipId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("visitTime")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("VisitHistories");
                 });
 
             modelBuilder.Entity("sportlife.Models.Client", b =>

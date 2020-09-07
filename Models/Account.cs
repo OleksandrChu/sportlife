@@ -8,6 +8,7 @@ namespace sportlife.Models
         public int Id { get; set; }
         [NotMapped]
         public int Balance { get; set; }
+        public int Debt { get; set; }
         public List<Transaction> Transactions { get; set; }
     }
 }

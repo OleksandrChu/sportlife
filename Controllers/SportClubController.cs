@@ -12,14 +12,17 @@ namespace sportlife.Controllers
         private readonly IMembershipService _membershipService;
         private readonly ITransactionService _transactionService;
         private readonly IAccountService _accountService;
+        private readonly IHistoryService _historyService;
         
         public SportClubController(IClubService service, IMembershipService membershipService,
-                                   ITransactionService transactionService, IAccountService accountService)
+                                   ITransactionService transactionService, IAccountService accountService,
+                                   IHistoryService historyService)
         {
             _clubService = service;
             _membershipService = membershipService;
             _transactionService = transactionService;
             _accountService = accountService;
+            _historyService = historyService;
         }
 
         [HttpPost("use/{serviceId}/{membershipId}")]
@@ -42,8 +45,10 @@ namespace sportlife.Controllers
                     Amount = service.Price * - 1,
                     Description = $"Paid {service.Price} credits for {service.Title} service."
                 });
+                _historyService.Create(new ServiceHistory(){MemberShipType = membership.Type, ServiceId = service.Id});
                 return Created("", "Paid"); 
             }
+            _historyService.Create(new ServiceHistory(){MemberShipType = membership.Type, ServiceId = service.Id});
             return Ok("Confirmed");
         }
     }

@@ -18,7 +18,7 @@ namespace sportlife.Services
             var accountBalance = _context.Accounts
                                 .Where(account => account.Id == memberShip.Account.Id)
                                 .First().Balance;
-            return (IsNotExpired(memberShip.ExpirationDate) && accountBalance > 0) ? ServiceUsageCode.CONFIRMED : ServiceUsageCode.ACCESS_DENIED;
+            return (IsNotExpired(memberShip.ExpirationDate) && accountBalance >= 0) ? ServiceUsageCode.CONFIRMED : ServiceUsageCode.ACCESS_DENIED;
         }
 
         private bool IsNotExpired(DateTime expirationDate)
