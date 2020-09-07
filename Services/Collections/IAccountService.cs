@@ -5,7 +5,7 @@ namespace sportlife.Services
 {
     public interface IAccountService
     {
-         Task<Account> Create(Account model);
+        Task<Account> Create(Account model);
 
         Task<Account> Select(int id);
     }
