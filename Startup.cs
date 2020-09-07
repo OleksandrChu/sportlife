@@ -11,7 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 using sportlife.Data;
 using sportlife.Builders;
-using sportlife.Repositories;
+using sportlife.Services;
 using sportlife.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -32,8 +32,9 @@ namespace sportlife
         {
             services.AddDbContext<ApplicationDbContext>(option =>  option.UseSqlite(_configuration.GetConnectionString("SQLite")));
             services.AddScoped<IMembershipBuilder, MembershipBuilder>();
-            services.AddScoped<IRepository<MemberShip>, MembershipRepository>();
-            services.AddScoped<IRepository<Account>, AccountRepository>();
+            services.AddScoped<IMembershipService, MembershipService>();
+            services.AddScoped<IAccountService, AccountService>();
+            services.AddScoped<ITransactionService, TransactionService>();
             services.AddMvc(option => option.EnableEndpointRouting = false).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
         }
 

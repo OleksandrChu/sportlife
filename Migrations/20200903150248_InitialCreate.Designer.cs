@@ -9,7 +9,7 @@ using sportlife.Data;
 namespace sportlife.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200902152642_InitialCreate")]
+    [Migration("20200903150248_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,7 +24,7 @@ namespace sportlife.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("Points")
+                    b.Property<int>("Balance")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
@@ -58,7 +58,7 @@ namespace sportlife.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("AccountId")
+                    b.Property<int?>("AccountId")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("ExpirationDate")
@@ -74,11 +74,42 @@ namespace sportlife.Migrations
                     b.ToTable("Memberships");
                 });
 
+            modelBuilder.Entity("sportlife.Models.Transaction", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("AccountId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Amount")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AccountId");
+
+                    b.ToTable("Transactions");
+                });
+
             modelBuilder.Entity("sportlife.Models.MemberShip", b =>
                 {
                     b.HasOne("sportlife.Models.Account", "Account")
                         .WithMany()
                         .HasForeignKey("AccountId");
+                });
+
+            modelBuilder.Entity("sportlife.Models.Transaction", b =>
+                {
+                    b.HasOne("sportlife.Models.Account", null)
+                        .WithMany("Transactions")
+                        .HasForeignKey("AccountId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

@@ -1,14 +1,15 @@
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using sportlife.Data;
 using sportlife.Models;
+using sportlife.Services;
 
-namespace  sportlife.Repositories
+namespace sportlife.Services
 {
-    public class AccountRepository : IRepository<Account>
+    public class AccountService : IAccountService
     {
         private readonly ApplicationDbContext _context;
-
-        public AccountRepository(ApplicationDbContext context)
+        public AccountService(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -22,12 +23,7 @@ namespace  sportlife.Repositories
 
         public async Task<Account> Select(int id)
         {
-            return await _context.Accounts.FindAsync(id);
-        }
-
-        public Task<Account> Update(Account model)
-        {
-            throw new System.NotImplementedException();
+            return await _context.Accounts.Include(a => a.Transactions).FirstAsync();
         }
     }
 }
