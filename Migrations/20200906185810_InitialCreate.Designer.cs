@@ -9,7 +9,7 @@ using sportlife.Data;
 namespace sportlife.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200904062759_InitialCreate")]
+    [Migration("20200906185810_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -22,9 +22,6 @@ namespace sportlife.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Balance")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");

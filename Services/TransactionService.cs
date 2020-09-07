@@ -18,10 +18,6 @@ namespace sportlife.Services
         public async Task<Transaction> Create(Transaction model)
         {
             _context.Transactions.Add(model);
-            var account = _context.Accounts
-                            .Where(acc => acc.Id == model.AccountId)
-                            .First();
-            account.Balance += model.Amount;
             await _context.SaveChangesAsync();
             return model;
         }
