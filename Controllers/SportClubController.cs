@@ -48,7 +48,7 @@ namespace sportlife.Controllers
                 _historyService.Create(new ServiceHistory(){MemberShipType = membership.Type, ServiceId = service.Id});
                 return Created("", "Paid"); 
             }
-             _historyService.Create(new ServiceHistory(){MemberShipType = membership.Type, ServiceId = service.Id});
+            _historyService.Create(new ServiceHistory(){MemberShipType = membership.Type, ServiceId = service.Id});
             return Ok("Confirmed");
         }
     }

@@ -13,5 +13,6 @@ namespace sportlife.Data
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
         public DbSet<ServiceHistory> ServiceHistories { get; set; }
+        public DbSet<VisitHistory> VisitHistories { get; internal set; }
     }
 }

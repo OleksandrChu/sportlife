@@ -9,5 +9,7 @@ namespace sportlife.Services
          Task<ServiceHistory> Create(ServiceHistory model);
 
          Task<List<ServiceHistory>> SelectAll();
+
+         Task<VisitHistory> Create(VisitHistory model);
     }
 }

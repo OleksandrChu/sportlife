@@ -21,6 +21,13 @@ namespace sportlife.Services
             return model;
         }
 
+        public async Task<VisitHistory> Create(VisitHistory model)
+        {
+            await _context.VisitHistories.AddAsync(model);
+            await _context.SaveChangesAsync();
+            return model;
+        }
+
         public Task<List<ServiceHistory>> SelectAll()
         {
             throw new System.NotImplementedException();
