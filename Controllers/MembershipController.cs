@@ -30,9 +30,9 @@ namespace sportlife.Controllers
         }
 
         [HttpPatch("{id}")]
-        public ActionResult<MemberShip> UpdateMembershipType(int id, [FromBody] UpdateType updateType) 
+        public ActionResult<MemberShip> UpdateMembershipType(int id, [FromBody] MemberShip memberShip)
         {
-            return Ok(_service.Update(id, updateType).Result);
+            return Ok(_service.Update(id, memberShip.Type).Result);
         }
     }
 }

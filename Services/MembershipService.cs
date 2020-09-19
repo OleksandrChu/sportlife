@@ -38,12 +38,12 @@ namespace sportlife.Services
             return memberShip;
         }
 
-        public async Task<MemberShip> Update(int id, UpdateType type)
+        public async Task<MemberShip> Update(int id, MemberShipType type)
         {
             var membership = await _context.Memberships
                                         .Where(membership => membership.Id == id)
                                         .FirstAsync();
-            membership.Type = type.Type;
+            membership.Type = type;
             await _context.SaveChangesAsync();
             return membership;
         }

@@ -9,6 +9,6 @@ namespace sportlife.Services
 
         Task<MemberShip> Select(int id);
         
-        Task<MemberShip> Update(int id, UpdateType type);
+        Task<MemberShip> Update(int id, MemberShipType type);
     }
 }
