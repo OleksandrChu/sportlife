@@ -20,7 +20,6 @@ namespace sportlife.Services
 
         public async Task<MemberShip> Create(MemberShip model)
         {
-            model.Account = _context.Accounts.Find(_context.Accounts.Max(p => p.Id));
             _context.Add(model);
             await _context.SaveChangesAsync();
             return model;

@@ -1,12 +1,14 @@
 using Microsoft.AspNetCore.Mvc;
+using sportlife.Data;
+using sportlife.Models;
+using sportlife.Builders;
 using sportlife.Services;
 
 namespace sportlife.Controllers
 {
-
     [ApiController]
     [Route("api/[controller]")]
-    class RegisterController : ControllerBase
+    public class RegisterController : ControllerBase
     {
         private readonly IAccountService _accountService;
         private readonly IMembershipService _membershipService;
@@ -19,10 +21,31 @@ namespace sportlife.Controllers
             _clientService = clientService;
         }
 
-//        [HttpPost]
-        // public IActionResult Register()
-        // {
+        [HttpPost]
+        public ActionResult<Client> tewst([FromBody] Register registerTemplate)
+        {
+            var account = _accountService.Create(new Account() {Debt = registerTemplate.AccountDebt});
+            var membership = _membershipService.Create(new MemberShip()
+            {
+                Type = (MemberShipType)registerTemplate.MemberShipType,
+                Account = account.Result
+            });
+            var client = _clientService.Create(new Client
+            {
+                FirstName = registerTemplate.FirstName,
+                LastName = registerTemplate.LastName,
+                Phone = registerTemplate.Phone,
+                MemberShip = membership.Result
+            });
+            return client.Result;
+        }
 
-        // }
+        [HttpGet]
+        public ActionResult<MemberShip> GetMembership(int id)
+        {
+            return Ok(_membershipService.Select(2).Result);
+        }
+
+        
     }
 }
