@@ -20,11 +20,5 @@ namespace sportlife.Controllers
         {
             return Ok(_service.Select(id).Result);
         }
-
-        [HttpPost]
-        public ActionResult<Client> CreateAccount([FromBody] Client client)
-        {
-            return Created("", _service.Create(client).Result);
-        }
     }
 }
